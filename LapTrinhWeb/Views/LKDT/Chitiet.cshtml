@@ -1,0 +1,45 @@
+﻿<style type="text/css">
+    #Datmua a{
+        clear:both; background-color:red;
+        color:white; width:120px; height:35px;
+        display:block; float:right; text-align:center;
+        padding-top:10px; text-decoration:none; font-weight:bold;
+    }
+    #Datmua a:hover{
+        background-color:gray;
+        color:red;
+    }
+</style>
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 style="font-size:xx-large">Thông tin sản phẩm</h2>
+<div>
+    <div style="width:20%; float:left; border-left: dotted 1px; border-color:azure">
+        <img src="~/Images/@Model.Anhbia" width="100%"/>
+    </div>
+    <div style="width:50%; float:left; padding:10px">
+        <h4 style="font-weight:bold; color:red">Tên sách: @Model.TenSP </h4>
+        <p style="text-align:justify"><Span style="font-weight:bold"> Mô tả: </Span>@Model.Mota </p>
+        <p style="font-weight:bold"> Giá bán: <span style="color:red; font-size:16pt "> @Model.Giaban VNĐ </span></p>
+    </div>
+   
+        <div id="Datmua">
+            @if (Session["Taikhoan"] != null)
+            {
+            <a href="@Url.Action("ThemGioHang", "GioHang", new { @iMaSP = Model.MaSP, @strURL = Request.Url.ToString() })" class="list-group-item">
+                ĐẶT MUA
+            </a>
+            }
+            @if (Session["Taikhoan"] == null)
+            {
+                <a href="@Url.Action("Dangnhap", "User", new { @iMaSP = Model.MaSP, @strURL = Request.Url.ToString() })" class="list-group-item">
+                    ĐẶT MUA
+                </a>
+            }
+        </div>
+    
+</div>
+

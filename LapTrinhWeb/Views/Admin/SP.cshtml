@@ -1,0 +1,101 @@
+﻿
+@using LapTrinhWeb.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<LapTrinhWeb.Models.SanPham>
+
+@helper Truncate(string input, int length)
+    {
+if(input.Length < length)
+{
+        @input
+}
+else
+{
+        @input.Substring(0,length)<text>..</text>
+}
+    }
+@{
+    ViewBag.Title = "SP";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Quản lý sản phẩm</h2>
+<p>
+    @Html.ActionLink("THÊM SẢN PHẨM", "Themmoisanpham")
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Giaban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Mota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Anhbia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Ngaycapnhat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Soluongton)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaLoai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaHSX)
+        </th>*@
+        <th style="width:15%"> Tên sản phẩm </th>
+        <th style="width:10%"> Giá bán </th>
+        <th style="width:20%"> Mô tả </thstyle="width:10%">
+        <th style="width:10%"> Ảnh bìa </th>
+        <th style="width:10%"> Ngày cập nhật </th>
+        <th style="width:5%"> SL Tồn </th>
+        <th style="width:10%"> Mã Loại </th>
+        <th style="width:10%"> Hãng SX </th>
+        <th style="width:10%"></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Giaban)
+        </td>
+        <td>
+            @Truncate(item.Mota, 100)
+        </td>
+        <td>
+            <img src="@Url.Content("~/Images/" + item.Anhbia)" style="max-height:100px"/>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ngaycapnhat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Soluongton)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiSP.TenLoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HangSanXuat.TenNSX)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "Suasanpham", new { id = item.MaSP }) |
+            @Html.ActionLink("Chi Tiết", "Chitietsanpham", new { id = item.MaSP }) |
+            @Html.ActionLink("Xóa", "Xoasanpham", new { id = item.MaSP })
+        </td>
+    </tr>
+}
+
+</table>
+    <p>Trang</p> @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount;
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("SP", new { page = page }))
+</div>

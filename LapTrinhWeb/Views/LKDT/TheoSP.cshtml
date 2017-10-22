@@ -1,0 +1,37 @@
+﻿@using LapTrinhWeb.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SanPham>
+@{
+    ViewBag.Title = "TheoSP";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="header_slide">
+    <div class="header_bottom_right">
+        <div class="content">
+            
+            <h3>Sản phẩm</h3>
+            <div class="section group">
+                @foreach (var spmoi in Model)
+            {
+                    <a href="@Url.Action("Chitiet", "LKDT", new { id = spmoi.MaSP })">
+                        <div class="grid_1_of_4 images_1_of_4" style="width:250px;height:300px">
+                            <a href="@Url.Action("Chitiet", "LKDT", new { id = spmoi.MaSP })">
+                                <img src="~/Images/@spmoi.Anhbia" alt="@spmoi.TenSP" style="max-height:100px" />
+                                <h2>@spmoi.TenSP </h2>
+                                <div class="price-details">
+                                    <div class="price-number">
+                                        <p><span class="rupees">@spmoi.Giaban</span></p>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                        </div>
+                        </a>
+            }
+</div>
+        </div>
+    </div>
+    </div>
+Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount;
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>

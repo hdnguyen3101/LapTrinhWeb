@@ -1,0 +1,10 @@
+﻿@model IEnumerable<LapTrinhWeb.Models.HangSanXuat>
+
+<h3>Hãng Sản Xuất</h3>
+@foreach (var item in Model)
+{
+    <li><a href="@Url.Action("TheoHang", "LKDT", new { id = item.MaHSX })">@item.TenNSX</a></li>
+            }
+
+
+

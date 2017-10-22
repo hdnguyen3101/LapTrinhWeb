@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="~/Content/css/slider.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="~/Content/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Content/js/easing.js"></script>
+    <script type="text/javascript" src="~/Content/js/startstop-slider.js"></script>
+</head>
+</head>
+<body>
+    <div class="wrap">
+            <div class="headertop_desc">
+                <div class="account_desc">
+                    <ul>
+                        @if (Session["Taikhoan"] == null)
+                        {
+                            <li><a href="@Url.Action("Dangky","User")">Đăng ký</a></li>
+                            <li><a href="@Url.Action("Dangnhap","User")"> Đăng nhập</a></li>
+                        }
+                        else
+                        {
+                            
+                            <li>Xin chào @Session["TenUser"]</li>
+                            <li>@Html.ActionLink("Đăng xuất", "logout", "User")</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+            <div class="header_bottom">
+                <div class="menu">
+                    <ul>
+                        <li class="active"><a href="@Url.Action("Index","LKDT")">Trang chủ</a></li>
+                        <li><a href="@Url.Action("About","LKDT")">About</a></li>
+                        <li><a href="@Url.Action("Lienhe","LKDT")">Liên hệ</a></li>
+                        @if (Session["Taikhoan"] != null)
+                        {
+                            @Html.Action("GiohangPartial","GioHang")
+                        }
+                        @*<li>
+                            <a href="#">Sản Phẩm</a>
+                            <ul class="sub-menu">    
+                                <li><a href="#">PC</a></li>
+                                <li><a href="#">Laptop</a></li>
+                                <li><a href="#">Gaming Gear</a></li>
+                                <li><a href="#">Phần mềm bản quyền</a></li>
+                            </ul>
+                        </li>*@
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        <div class="header_bottom_left">
+            <div class="categories">
+                <ul>
+                  
+                    @Html.Action("LoaiSP","LKDT")
+                    
+                </ul>
+            </div>
+            <div class="categories">
+                <ul>
+
+                    @Html.Action("NhaSX", "LKDT")
+
+                </ul>
+            </div>
+        </div>
+
+            <div class="container body-content" style="min-height:500px">
+                @RenderBody()
+            </div>
+
+            <div class="copy_right">
+                <p>&copy; @DateTime.Now.Year - Website Môn Học</p>
+            </div>
+        </div>
+</body>
+</html>

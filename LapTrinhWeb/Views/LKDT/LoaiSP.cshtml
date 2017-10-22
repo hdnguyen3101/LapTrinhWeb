@@ -1,0 +1,8 @@
+﻿@model IEnumerable<LapTrinhWeb.Models.LoaiSP>
+
+            <h3>Sản phẩm</h3>
+            @foreach (var item in Model)
+            { 
+                <li><a href="@Url.Action("TheoSP","LKDT",new { id = item.MaLoai }) ">@item.TenLoai</a></li>
+                        }
+
